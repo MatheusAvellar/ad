@@ -1,19 +1,18 @@
 import numpy as np
 import heapq as hq
 
-from cacheFIFO import CacheFIFO
 from cacheLRU import CacheLRU
+from cacheFIFO import CacheFIFO
 from cacheRandom import CacheRandom
+from cacheStatic import CacheStatic
 
 from util import parse_arguments, confidence_interval
 
-lambda_ = 1
-N = 3
-cache_size = 2
+lambda_ = None
+N = None
+cache_size = None
 
-contents = [f"c{i}" for i in range(1,N+1)]
-
-n_events = 100
+n_events = None
 
 # faço broadcast desse conteudo para todas as caches
 # mantenho também uma heap de prioridade dos eventos
@@ -26,6 +25,7 @@ def broadcast_content(events, caches, time, content, cid):
 def simulate_cenario1(CacheType):
     events = []
     hq.heapify(events)
+    contents = [f"c{i}" for i in range(1,N+1)]
 
     copy_contents = contents.copy()
     initial_contents = [(0, copy_contents.pop(np.random.randint(len(copy_contents)))) for i in range(cache_size)]
@@ -71,6 +71,7 @@ def run_simulation(cache_type, n_sims=100, n_rounds=30):
         "FIFO": CacheFIFO,
         "LRU": CacheLRU,
         "RAND": CacheRandom,
+        "STATIC": CacheStatic
     }
     Cache = cache_class_mapping[cache_type]
 
@@ -85,12 +86,11 @@ def run_simulation(cache_type, n_sims=100, n_rounds=30):
     print("Média:", np.mean(means))
     print("Intervalo de confiança:", confidence_interval(means))
 
-def main():
+def main(args):
     global N
     global n_events
     global lambda_
     global cache_size
-    args = parse_arguments()
 
     N = args.N
     n_events = args.n_events
@@ -100,4 +100,4 @@ def main():
     run_simulation(args.cache, n_sims=args.n_sims, n_rounds=args.n_rounds)
 
 if __name__ == "__main__":
-    main()
+    main(parse_arguments())
