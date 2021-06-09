@@ -7,7 +7,6 @@ from util import parse_arguments
 def main():
     args = parse_arguments()
 
-    print(args)
     cenario_mapping = {
         '1': cenario1,
         '2': cenario2,
@@ -15,7 +14,7 @@ def main():
     }
 
     cenario = cenario_mapping[args.cenario]
-    cenario.run_simulation(args.cache, n_sims=args.n_sims, n_rounds=args.n_rounds)
+    cenario.main(args)
 
 if __name__ == '__main__':
     main()
