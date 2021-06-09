@@ -5,6 +5,7 @@ from cacheLRU import CacheLRU
 from cacheFIFO import CacheFIFO
 from cacheRandom import CacheRandom
 from cacheStatic import CacheStatic
+from cacheCamada import CacheCamada
 
 from util import parse_arguments, confidence_interval
 
@@ -111,7 +112,7 @@ def run_simulation(cache_type, n_sims=100, n_rounds=100):
         response_time_total = 0
         # misses_l = []
         for _ in range(n_sims):
-            response_time_mean = simulate_cenario3(Cache)
+            response_time_mean = simulate_cenario(Cache)
             response_time_total += response_time_mean
             # misses_l.append(unit_miss/n_events)
         means.append((response_time_mean/n_sims)/n_events)

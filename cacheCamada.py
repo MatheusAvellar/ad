@@ -5,11 +5,11 @@ from cache import Cache
 from util import write_log
 
 class CacheCamada(Cache):
-    def __init__(self, id, events, size=2, theta=float('inf'), mu=1, children=0, level=0, max_level=3):
-        super()
+    def __init__(self, id_, events, size=2, theta=float('inf'), mu=1, n_children=0, level=0, max_level=3):
+        super().__init__(id_, events, size=size, theta=theta, mu=mu)
         self._level = level
         self._max_level = max_level
-        self._n_children = children
+        self._n_children = n_children
         self.children_cache = []
         if level < max_level:
             self._init_children()
@@ -18,8 +18,8 @@ class CacheCamada(Cache):
         for _ in range(self._n_children):
             id_ = f'{self.id}{self._level}'
             self.children_cache.append(
-                CacheCamada(id_, self.events, size=self._size, theta=self.theta*3, mu=self.mu*3,
-                    children=self._n_children, level=self._level+1, max_level=self._max_level)
+                CacheCamada(id_, self._events, size=self._size, theta=self.theta*3, mu=self.mu*3,
+                    n_children=self._n_children, level=self._level+1, max_level=self._max_level)
             )
 
     def _update_entry(self, event):
