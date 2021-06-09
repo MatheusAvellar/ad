@@ -8,6 +8,7 @@ def write_csv(*args):
     print(csv_str)
 
 def write_log(tempo='0', cache='0', cid='0', tipo_requisicao='hit', n_requisicoes_pendentes='0'):
+    return
     write_csv(str(tempo), str(cache), str(cid), tipo_requisicao, str(n_requisicoes_pendentes))
 
 # [Ref] https://stackoverflow.com/c/ad-2020-2/a/64/9
@@ -41,5 +42,14 @@ def parse_arguments():
 
     parser.add_argument('-p', type=float, default=1,
                         help='Probabilidade da requisição chegar a cache', dest='p')
+
+    parser.add_argument('-a', '--alpha', type=float, default=1,
+                        help='Alpha', dest='alpha')
+    parser.add_argument('-m', '--mu', type=float, default=1,
+                        help='Mu', dest='mu')
+    parser.add_argument('-phi', '--phi', type=float, default=1,
+                        help='Phi', dest='phi')
+    parser.add_argument('-theta', '--theta', type=float, default=float('inf'),
+                        help='Theta', dest='theta')
 
     return parser.parse_args()
