@@ -3,7 +3,7 @@ import heapq as hq
 
 from cache import Cache
 
-class CacheRandom(Cache):
+class CacheStatic(Cache):
     def _handle_hit(self, event):
         return
 
