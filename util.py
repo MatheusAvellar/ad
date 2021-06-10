@@ -30,6 +30,9 @@ def parse_arguments():
                         help='Número de simulações a serem executadas', dest='n_sims')
     parser.add_argument('-r', '--rounds', type=int, default=50,
                         help='Número de rodadas a serem realizadas', dest='n_rounds')
+    parser.add_argument('-plot', '--plot', type=bool, default=False,
+                        action=argparse.BooleanOptionalAction,
+                        help='Plota o gráfico', dest='plot')
 
     parser.add_argument('-l', '--lambda', type=int, default=1,
                         help='Lambda', dest='lambda_')
