@@ -115,7 +115,7 @@ def run_simulation(cache_type, n_sims=100, n_rounds=100):
             response_time_mean = simulate_cenario(Cache)
             response_time_total += response_time_mean
             # misses_l.append(unit_miss/n_events)
-        means.append((response_time_mean/n_sims)/n_events)
+        means.append(response_time_total/n_sims)
 
     print("Média:", np.mean(means))
     print("Intervalo de confiança:", confidence_interval(means))
