@@ -86,6 +86,8 @@ def run_simulation(cache_type, n_sims=100, n_rounds=30):
     print("Média:", np.mean(means))
     print("Intervalo de confiança:", confidence_interval(means))
 
+    return means
+
 def main(args):
     global N
     global n_events
@@ -97,7 +99,7 @@ def main(args):
     lambda_ = args.lambda_
     cache_size = args.cache_size
 
-    run_simulation(args.cache, n_sims=args.n_sims, n_rounds=args.n_rounds)
+    return run_simulation(args.cache, n_sims=args.n_sims, n_rounds=args.n_rounds)
 
 if __name__ == "__main__":
     main(parse_arguments())

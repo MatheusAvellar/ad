@@ -130,12 +130,10 @@ def run_simulation(cache_type, n_sims=100, n_rounds=100):
     means = []
     for _ in range(n_rounds):
         response_time_total = 0
-        # misses_l = []
         for _ in range(n_sims):
             response_time_mean = simulate_cenario3(Cache)
             response_time_total += response_time_mean
-            # misses_l.append(unit_miss/n_events)
-        means.append((response_time_mean/n_sims)/n_events)
+        means.append(response_time_total/n_sims)
 
     print("Média:", np.mean(means))
     print("Intervalo de confiança:", confidence_interval(means))
@@ -163,7 +161,7 @@ def main(args):
     phi = args.phi
     theta = args.theta
 
-    run_simulation(args.cache, n_sims=args.n_sims, n_rounds=args.n_rounds)
+    return run_simulation(args.cache, n_sims=args.n_sims, n_rounds=args.n_rounds)
 
 if __name__ == "__main__":
     main(parse_arguments())

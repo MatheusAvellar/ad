@@ -99,7 +99,7 @@ def main(args):
     cache_size = args.cache_size
     p = args.p
 
-    run_simulation(args.cache, n_sims=args.n_sims, n_rounds=args.n_rounds)
+    return run_simulation(args.cache, n_sims=args.n_sims, n_rounds=args.n_rounds)
 
 if __name__ == "__main__":
     main(parse_arguments())
